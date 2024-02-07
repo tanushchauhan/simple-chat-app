@@ -1,21 +1,26 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 function Page() {
   const input = useRef(null);
   const router = useRouter();
-  const user = localStorage.getItem("user");
-  if (user) {
-    router.push("/chat");
-  }
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const res = localStorage.getItem("user") || "";
+      if (res !== "") router.push("/chat");
+    }
+  }, [router]);
+
   function handlekey(e) {
     if (e.code === "Enter") {
       e.preventDefault();
       if (input.current === "") return;
-      localStorage.setItem("user", input.current.value);
-      router.push("/chat");
+      if (typeof window !== "undefined") {
+        localStorage.setItem("user", input.current.value);
+        router.push("/chat");
+      }
     }
   }
   return (
@@ -33,8 +38,12 @@ function Page() {
       <button
         className="mt-4 text-gray-200 rounded-2xl bg-blue-600 px-4 py-2 hover:bg-blue-700 transition-all duration-300"
         onClick={() => {
-          localStorage.setItem("user", input.current.value);
-          router.push("/chat");
+          const e = {
+            code: "Enter",
+            preventDefault: () => {
+              return;
+            },
+          };
         }}
       >
         submit

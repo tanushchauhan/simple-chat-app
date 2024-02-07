@@ -1,6 +1,7 @@
-import ActualMessages from "./ActualMessages";
+import dynamic from "next/dynamic";
 
 async function MessageArea() {
+  const NoSSR = dynamic(() => import("./ActualMessages"), { ssr: false });
   const res = await import("@/app/api/chats/route");
   const { success, data } = await (await res.GET()).json();
   if (!success)
@@ -11,7 +12,7 @@ async function MessageArea() {
     );
   return (
     <div className="h-full overflow-auto flex flex-col-reverse">
-      <ActualMessages data={data} />
+      <NoSSR data={data} />
     </div>
   );
 }

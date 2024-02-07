@@ -1,10 +1,16 @@
 "use client";
-import { createClient } from "@supabase/supabase-js";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
+import revalidateAll from "./actions";
 function ChatArea() {
   const input = useRef(null);
   const check = useRef(false);
-  const user = localStorage.getItem("user");
+  const user = useRef("");
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      user.current = localStorage.getItem("user");
+    }
+  }, []);
+
   function handleKey(e) {
     if (e.code == "Enter") {
       e.preventDefault();
@@ -15,7 +21,8 @@ function ChatArea() {
         check.current = false;
         return;
       }
-      const data = { sender: user, content: input.current.innerHTML };
+
+      const data = { sender: user.current, content: input.current.innerHTML };
       fetch("/api/chats", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
