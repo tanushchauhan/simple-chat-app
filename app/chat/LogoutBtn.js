@@ -7,7 +7,7 @@ function LogoutBtn() {
   const router = useRouter();
 
   function handleClick() {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && window.localStorage) {
       localStorage.removeItem("user");
       revalidateAll();
       router.push("/");

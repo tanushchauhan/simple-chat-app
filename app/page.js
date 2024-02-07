@@ -7,7 +7,7 @@ function Page() {
   const input = useRef(null);
   const router = useRouter();
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && window.localStorage) {
       const res = localStorage.getItem("user") || "";
       if (res !== "") router.push("/chat");
     }

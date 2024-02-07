@@ -43,7 +43,7 @@ function ActualMessages({ data }) {
   const router = useRouter();
   useEffect(() => {
     revalidateAll();
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && window.localStorage) {
       user.current = localStorage.getItem("user");
       if (!user.current) router.push("/");
     }
