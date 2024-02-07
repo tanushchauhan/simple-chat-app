@@ -7,10 +7,12 @@ export async function GET(req, res) {
   let { data: chats, error } = await supabase
     .from("chats")
     .select("*")
+    .order("id", { ascending: false })
     .limit(50);
   if (error) {
     return Response.json({ success: false });
   } else {
+    chats.reverse();
     return Response.json({ success: true, data: chats });
   }
 }

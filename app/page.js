@@ -6,8 +6,23 @@ import { useRef } from "react";
 function Page() {
   const input = useRef(null);
   const router = useRouter();
+  const user = localStorage.getItem("user");
+  if (user) {
+    router.push("/chat");
+  }
+  function handlekey(e) {
+    if (e.code === "Enter") {
+      e.preventDefault();
+      if (input.current === "") return;
+      localStorage.setItem("user", input.current.value);
+      router.push("/chat");
+    }
+  }
   return (
-    <main className="flex flex-col items-center justify-center h-screen">
+    <main
+      className="flex flex-col items-center justify-center h-screen"
+      onKeyDown={handlekey}
+    >
       <h1 className="text-gray-200 text-3xl my-4">
         Welcome to a Simple Chat app!
       </h1>

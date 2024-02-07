@@ -58,7 +58,6 @@ function ActualMessages({ data }) {
             console.error("Error reciving real time messages");
           } else {
             setList((e) => [...e, payload.new]);
-            console.log("ran");
             revalidateAll();
           }
         }

@@ -11,7 +11,7 @@ async function MessageArea() {
     );
   return (
     <div className="h-full overflow-auto flex flex-col-reverse">
-      <ActualMessages data={data} currentUser="Yaya" />
+      <ActualMessages data={data} />
     </div>
   );
 }
