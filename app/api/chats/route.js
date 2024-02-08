@@ -26,7 +26,6 @@ export async function POST(req) {
   if (error) {
     return Response.json({ success: false });
   } else {
-    console.log("data added");
     return Response.json({ success: true });
   }
 }

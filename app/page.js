@@ -25,13 +25,13 @@ function Page() {
   }
   return (
     <main
-      className="flex flex-col items-center justify-center h-screen"
+      className="flex flex-col items-center justify-center h-screen mx-2"
       onKeyDown={handlekey}
     >
-      <h1 className="text-gray-200 text-3xl my-4">
+      <h1 className="text-gray-200 text-3xl my-4 text-center">
         Welcome to a Simple Chat app!
       </h1>
-      <h2 className="text-gray-200 text-2xl my-4">
+      <h2 className="text-gray-200 text-2xl my-4 text-center">
         Enter your name below to start -
       </h2>
       <input className="outline-none p-2 rounded-2xl" ref={input} />
@@ -44,6 +44,7 @@ function Page() {
               return;
             },
           };
+          handlekey(e);
         }}
       >
         submit

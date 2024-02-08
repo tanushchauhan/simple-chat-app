@@ -43,7 +43,7 @@ function ChatArea() {
     <>
       <div className="flex items-center h-full w-full">
         <div
-          contentEditable="true"
+          contentEditable="plaintext-only"
           className="h-full py-3 lg:pt-8 min-w-full bg-gray-700 text-xl rounded-b-2xl px-4 text-gray-200 focus:outline-none cursor-text break-all"
           ref={input}
           onKeyDown={handleKey}
